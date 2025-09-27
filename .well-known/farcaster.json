@@ -4,7 +4,7 @@
     "payload": "",
     "signature": ""
   },
-  "frame": {
+  "miniapp": {
     "name": "Ashton Koehl",
     "version": "1",
     "iconUrl": "https://ashtonkoehl.github.io/icon.png",
