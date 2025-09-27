@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My Farcaster</title>
+  <meta name="description" content="One-button site that opens my Farcaster profile." />
+  <meta property="og:title" content="My Farcaster" />
+  <meta property="og:description" content="Tap the button to visit my Farcaster profile." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#7047EB" />
+  <style>
+    :root {
+      --bg: #0f1220;
+      --fg: #e8e8ff;
+      --muted: #b8b7d9;
+      --accent: #7047EB; /* Farcaster-ish purple */
+      --accent-2: #9B7BFF;
+    }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      display: grid;
+      place-items: center;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background: radial-gradient(1200px 800px at 70% 20%, rgba(155,123,255,0.18), transparent 60%),
+                  radial-gradient(1000px 600px at 20% 80%, rgba(112,71,235,0.25), transparent 60%),
+                  var(--bg);
+      color: var(--fg);
+    }
+    .card {
+      width: min(92vw, 560px);
+      padding: 28px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      text-align: center;
+      backdrop-filter: blur(8px);
+    }
+    h1 { margin: 0 0 8px; font-size: 1.9rem; letter-spacing: 0.2px; }
+    p { margin: 0 0 22px; color: var(--muted); }
+    .btn {
+      --pad: 14px 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: var(--pad);
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: white;
+      font-weight: 700;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 1.06rem;
+      transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+      box-shadow: 0 6px 18px rgba(112,71,235,0.45);
+    }
+    .btn:focus { outline: 2px solid #ffffff55; outline-offset: 2px; }
+    .btn:hover { transform: translateY(-1px); filter: brightness(1.05); box-shadow: 0 10px 26px rgba(112,71,235,0.55); }
+    .btn:active { transform: translateY(0); filter: brightness(0.97); }
+    .note { margin-top: 16px; font-size: 0.92rem; color: #cfcfff; opacity: .8; }
+    .row { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+    .icon { width: 20px; height: 20px; display: inline-block; }
+    /* Small, accessible footer */
+    footer { margin-top: 22px; font-size: 12px; color: #a8a6cd; opacity: .8; }
+    a.link { color: #cabfff; }
+  </style>
+</head>
+<body>
+  <main class="card" role="main">
+    <h1>Hey! 👋</h1>
+    <p>Tap the button to open my Farcaster profile.</p>
+
+    <!-- Button opens the profile in a new tab (safe rel attributes) -->
+    <a class="btn" href="https://farcaster.xyz/xxxrrr079" target="_blank" rel="noopener noreferrer" aria-label="Open my Farcaster profile in a new tab">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M7 17l10-10M14 7h6v6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Open Farcaster Profile
+    </a>
+
+    <div class="note">@xxxrrr079 on Farcaster</div>
+    <footer>
+      <div class="row">
+        <span>Made with ❤️</span>
+        <span>·</span>
+        <a class="link" href="mailto:me@example.com">Contact</a>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Optional: if someone opens on iOS standalone (PWA), ensure external links open in Safari -->
+  <script>
+    (function(){
+      const isStandalone = window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
+      if (isStandalone) {
+        document.querySelectorAll('a[target="_blank"]').forEach(a => {
+          a.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.location.href = a.href; // Open in Safari instead of the webview
+          });
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
