@@ -3,30 +3,68 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ashton Koehl</title>
+  <meta name="description" content="Personal About Me page for Ashton Koehl." />
 
-  <!-- OpenGraph (preview card shown in clients) -->
-  <meta property="og:title" content="Open @xxxrrr079 on Farcaster" />
-  <meta property="og:description" content="Tap the button below to open my profile." />
-  <!-- IMPORTANT: Use an ABSOLUTE https URL to a 1200x630 image you host -->
-  <meta property="og:image" content="https://songzhaocheng.github.io/farcaster-profile-site/card.png" />
+  <!-- Social preview (absolute URLs; put preview.png in the repo root) -->
+  <meta property="og:title" content="Ashton Koehl" />
+  <meta property="og:description" content="Learn more about Ashton Koehl." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://ashtonkoehl.github.io/static-site/preview.png" />
+  <meta name="theme-color" content="#cc0000" />
 
-  <!-- Farcaster Frame (static, no backend) -->
+  <!-- Optional Farcaster preview image (no buttons/actions) -->
   <meta property="fc:frame" content="vNext" />
-  <meta property="fc:frame:image" content="https://songzhaocheng.github.io/farcaster-profile-site/card.png" />
-  <meta property="fc:frame:button:1" content="Open Profile" />
-  <meta property="fc:frame:button:1:action" content="link" />
-  <meta property="fc:frame:button:1:target" content="https://farcaster.xyz/xxxrrr079" />
+  <meta property="fc:frame:image" content="https://ashtonkoehl.github.io/static-site/preview.png" />
 
-  <title>Farcaster Frame – Open Profile</title>
+  <!-- Ensure relative links resolve under /static-site/ if you add assets later -->
+  <base href="/static-site/">
+
+  <style>
+    :root {
+      --bg: #000000;     /* black */
+      --fg: #ffffff;     /* white text */
+      --accent: #cc0000; /* red */
+    }
+    html, body { height: 100%; margin: 0; }
+    body {
+      display: grid;
+      place-items: center;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    main {
+      max-width: 680px;
+      width: min(92vw, 680px);
+      padding: 36px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(204,0,0,0.4);
+      box-shadow: 0 10px 28px rgba(204,0,0,0.28);
+      text-align: center;
+    }
+    h1 {
+      margin: 0 0 14px;
+      font-size: 2.4rem;
+      color: var(--accent);
+      letter-spacing: .3px;
+    }
+    p {
+      margin: 0;
+      font-size: 1.12rem;
+      line-height: 1.7;
+      color: #f0f0f0;
+    }
+  </style>
 </head>
 <body>
-  <!-- Fallback UI for normal browsers -->
-  <main style="min-height:60vh;display:grid;place-items:center;font-family:system-ui">
-    <div style="text-align:center">
-      <h1>Open @xxxrrr079</h1>
-      <p>This page is a Farcaster Frame. In Warpcast it shows a button.</p>
-      <p><a href="https://farcaster.xyz/xxxrrr079">Open profile ↗</a></p>
-    </div>
+  <main role="main">
+    <h1>Ashton Koehl</h1>
+    <p>
+      Hi, I’m Ashton — a builder and problem-solver who loves tech, gaming, and creating projects that are useful and fun.
+      I’m currently exploring ways to blend development, design, and community into simple experiences that feel great to use.
+    </p>
   </main>
 </body>
 </html>
