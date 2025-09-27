@@ -1,19 +1,20 @@
 {
-  "accountAssociation": {
-    "header": "",
-    "payload": "",
-    "signature": ""
-  },
   "frame": {
-    "name": "Ashton About Me",
+    "name": "Ashton Koehl",
     "version": "1",
     "iconUrl": "https://ashtonkoehl.github.io/icon.png",
     "homeUrl": "https://ashtonkoehl.github.io/miniapp.html",
     "imageUrl": "https://ashtonkoehl.github.io/image.png",
     "splashImageUrl": "https://ashtonkoehl.github.io/splash.png",
     "splashBackgroundColor": "#FF0000",
-    "subtitle": "About Ashton",
-    "description": "Quick about-me mini app.",
+    "webhookUrl": "https://ashtonkoehl.github.io/api/webhook",
+    "subtitle": "Ashton About me",
+    "description": "Ashton About me",
     "primaryCategory": "social"
+  },
+  "accountAssociation": {
+    "header": "",
+    "payload": "",
+    "signature": ""
   }
 }
