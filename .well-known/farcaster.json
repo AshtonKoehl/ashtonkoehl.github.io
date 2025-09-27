@@ -1,8 +1,8 @@
 {
   "accountAssociation": {
-    "header": "",
-    "payload": "",
-    "signature": ""
+    "header": "eyJmaWQiOjEzNTE4OTEsInR5cGUiOiJjdXN0b2R5Iiwia2V5IjoiMHgxQjg1RjUyQ0I2ZTNDMThlM2RhM2QwOUREMTIzMzExNTVBZjljZGI3In0",
+    "payload": "eyJkb21haW4iOiJhc2h0b25rb2VobC5naXRodWIuaW8ifQ",
+    "signature": "MHgzZmMxZTE2YjBmODIzMGVmNWMwYmRjMmY4YWM2YTIyNjBjOTk4MDA5YzRhNTE3YTdkNTg5NGQ2OGIyYzNlZDA2M2Y5MDI2NzJlZDcwMjBiYzFhNDJmNzJhNWZmMjAzNTY5NDhiYTg5MTdmNjBmZWE5ZWViZjNmZDU3OGI0ZWVhYzFj"
   },
   "miniapp": {
     "name": "Ashton Koehl",
