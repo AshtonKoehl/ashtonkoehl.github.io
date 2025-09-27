@@ -1,0 +1,19 @@
+{
+  "frame": {
+    "name": "Ashton About Me",
+    "version": "1",
+    "iconUrl": "https://portfolio-ashton.vercel.app/icon.png",
+    "homeUrl": "https://portfolio-ashton.vercel.app",
+    "imageUrl": "https://portfolio-ashton.vercel.app/image.png",
+    "splashImageUrl": "https://portfolio-ashton.vercel.app/splash.png",
+    "splashBackgroundColor": "#6200EA",
+    "subtitle": "About Ashton",
+    "description": "Quick about-me mini app.",
+    "primaryCategory": "social"
+  },
+  "accountAssociation": {
+    "header": "",
+    "payload": "",
+    "signature": ""
+  }
+}
