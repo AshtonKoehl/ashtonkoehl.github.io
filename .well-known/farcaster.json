@@ -1,19 +1,19 @@
 {
-  "frame": {
-    "name": "Ashton About Me",
-    "version": "1",
-    "iconUrl": "https://portfolio-ashton.vercel.app/icon.png",
-    "homeUrl": "https://portfolio-ashton.vercel.app",
-    "imageUrl": "https://portfolio-ashton.vercel.app/image.png",
-    "splashImageUrl": "https://portfolio-ashton.vercel.app/splash.png",
-    "splashBackgroundColor": "#6200EA",
-    "subtitle": "About Ashton",
-    "description": "Quick about-me mini app.",
-    "primaryCategory": "social"
-  },
   "accountAssociation": {
     "header": "",
     "payload": "",
     "signature": ""
+  },
+  "frame": {
+    "name": "Ashton About Me",
+    "version": "1",
+    "iconUrl": "https://ashtonkoehl.github.io/static-site/icon.png",
+    "homeUrl": "https://ashtonkoehl.github.io/static-site",
+    "imageUrl": "https://ashtonkoehl.github.io/static-site/image.png",
+    "splashImageUrl": "https://ashtonkoehl.github.io/static-site/splash.png",
+    "splashBackgroundColor": "#6200EA",
+    "subtitle": "About Ashton",
+    "description": "Quick about-me mini app.",
+    "primaryCategory": "social"
   }
 }
