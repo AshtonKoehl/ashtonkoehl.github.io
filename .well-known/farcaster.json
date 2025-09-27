@@ -1,4 +1,9 @@
 {
+  "accountAssociation": {
+    "header": "",
+    "payload": "",
+    "signature": ""
+  },
   "frame": {
     "name": "Ashton Koehl",
     "version": "1",
@@ -11,10 +16,5 @@
     "subtitle": "Ashton About me",
     "description": "Ashton About me",
     "primaryCategory": "social"
-  },
-  "accountAssociation": {
-    "header": "",
-    "payload": "",
-    "signature": ""
   }
 }
