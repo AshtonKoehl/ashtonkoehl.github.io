@@ -16,6 +16,7 @@
       --text: #f6f7fb;
       --muted: rgba(246,247,251,.72);
       --accent: #7c9cff;
+      --accent-strong: #cc0000;
       --dot: rgba(255,255,255,.16);
     }
     *, *::before, *::after { box-sizing: border-box; }
@@ -52,30 +53,80 @@
       transform: translateY(calc(var(--scroll, 0) * 0.2px));
       filter: blur(0.4px);
     }
+    header {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 18px 24px;
+      backdrop-filter: blur(18px);
+      background: rgba(5,6,10,.88);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .brand {
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px;
+      border-radius: 999px;
+      overflow: hidden;
+      min-width: 420px;
+      position: relative;
+      border: 1px solid rgba(255,255,255,.08);
+    }
+    .nav-bar::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, #111 0%, #fff 22%, #cc0000 44%, #000 72%, #fff 100%);
+      opacity: .8;
+      filter: blur(2px);
+      transform: translateX(-100%);
+      animation: slideGradient 9s linear infinite;
+    }
+    .nav-bar::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(255,255,255,.16), transparent 30%, rgba(255,255,255,.08));
+      mix-blend-mode: screen;
+    }
+    nav a {
+      position: relative;
+      z-index: 1;
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.94rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      padding: 14px 18px;
+      transition: color .25s ease, transform .25s ease;
+    }
+    nav a:hover {
+      color: #fffcff;
+      transform: translateY(-1px);
+    }
     main {
       position: relative;
       min-height: 100vh;
       display: grid;
       place-items: center;
-      padding: 90px 24px 64px;
+      padding: 130px 24px 64px;
     }
     .hero {
       width: min(1100px, 100%);
       display: grid;
       gap: 48px;
-    }
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.65rem;
-      padding: 0.85rem 1.1rem;
-      border-radius: 999px;
-      background: rgba(124,156,255,.12);
-      color: var(--accent);
-      border: 1px solid rgba(124,156,255,.18);
-      font-size: 0.95rem;
-      letter-spacing: 0.04em;
-      font-weight: 600;
     }
     .hero-title {
       margin: 0;
@@ -129,7 +180,7 @@
     }
     .card:hover {
       transform: translateY(-6px);
-      border-color: rgba(124,156,255,.2);
+      border-color: rgba(204,0,0,.35);
     }
     .card h3 {
       margin: 0 0 12px;
@@ -156,6 +207,25 @@
       background: var(--accent);
       animation: pulse 1.8s infinite;
     }
+    section.content-section {
+      margin-top: 64px;
+      scroll-margin-top: 120px;
+    }
+    .section-title {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 16px;
+      font-size: 1.2rem;
+      color: #fff;
+    }
+    .section-title::before {
+      content: "";
+      width: 34px;
+      height: 2px;
+      background: linear-gradient(90deg, #cc0000, #fff, #000);
+      border-radius: 999px;
+    }
     @keyframes pulse {
       0%, 100% { opacity: .75; transform: scale(.95); }
       50% { opacity: 1; transform: scale(1.2); }
@@ -163,56 +233,125 @@
     @keyframes reveal {
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
+    @keyframes slideGradient {
+      to { transform: translateX(100%); }
+    }
+    @media (max-width: 960px) {
+      .nav-bar {
+        min-width: 100%;
+        flex-wrap: wrap;
+      }
+      nav a {
+        padding: 12px 14px;
+      }
+      main { padding: 170px 18px 64px; }
+    }
     @media (max-width: 760px) {
-      main { padding: 70px 18px 48px; }
+      header { flex-direction: column; align-items: flex-start; padding: 16px 18px; }
+      main { padding: 190px 18px 48px; }
       .hero { gap: 34px; }
       .panel { padding: 28px; }
     }
   </style>
 </head>
 <body>
+  <header>
+    <div class="brand">Ashton Koehl</div>
+    <div class="nav-bar">
+      <nav>
+        <a href="#about">About Me</a>
+        <a href="#past-work">Past Work</a>
+        <a href="#current-job">Current Job</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
   <main>
     <section class="hero" id="hero">
       <div class="intro">
-        <span class="badge">Portfolio</span>
         <h1 class="hero-title">Ashton Koehl</h1>
         <p class="subline">Minimal portfolio for a creative problem-solver. I build clean experiences, share what I’m learning, and create projects that stand out without being loud.</p>
-        <div class="scroll-hint"><span></span>Scroll to see work, stories, and the subtle animated dot background.</div>
+        <div class="scroll-hint"><span></span>Scroll to explore the full portfolio sections below.</div>
       </div>
       <div class="panel">
-        <h2>About me</h2>
-        <p>I’m Ashton. I love combining design, code, and storytelling to make a personal portfolio that feels modern and calm. My focus is on polished interfaces, thoughtful details, and strong ideas.</p>
-        <div class="cards">
-          <article class="card">
-            <h3>Creative projects</h3>
-            <p>Building polished web experiences, portfolio showcases, and interactive landing pages with subtle motion.</p>
-          </article>
-          <article class="card">
-            <h3>Technical interests</h3>
-            <p>Front-end development, animations, responsive design, and making minimal layouts feel dynamic.</p>
-          </article>
-          <article class="card">
-            <h3>Contact</h3>
-            <p>Reach out for collaboration, new ideas, or to see the latest work. I’m happy to connect and build something memorable.</p>
-          </article>
-        </div>
+        <h2>Welcome</h2>
+        <p>This portfolio is designed to feel polished and calm while still showing movement through the animated dot background and gradient navigation bar. Each section below can be expanded with details, work examples, and links.</p>
       </div>
     </section>
-    <section class="panel" style="margin-top:64px;">
-      <h2>Featured highlights</h2>
-      <p>Simple sections let your story breathe. The background dots move gently as you scroll, creating depth without distraction.</p>
-      <div class="cards" style="margin-top:24px;">
+
+    <section class="panel content-section" id="about">
+      <h2 class="section-title">About Me</h2>
+      <p>Hi, I’m Ashton. I enjoy building clean web interfaces, exploring game design, and sharing what I learn through personal projects. My style is minimal, focused, and polished.</p>
+    </section>
+
+    <section class="panel content-section" id="past-work">
+      <h2 class="section-title">Past Work</h2>
+      <div class="cards">
         <article class="card">
-          <h3>Landing page focus</h3>
-          <p>Clean typography, generous whitespace, and a bold hero moment for your name.</p>
+          <h3>Custom landing pages</h3>
+          <p>Designed and developed sleek landing pages that communicate a strong personal brand while keeping interactions smooth and simple.</p>
         </article>
         <article class="card">
-          <h3>Motion details</h3>
-          <p>Animated dot field and soft gradients add calm movement to the page.</p>
+          <h3>Content-driven builds</h3>
+          <p>Created portfolio pieces, blog-style pages, and informational sites that let the content shine with minimal distraction.</p>
+        </article>
+        <article class="card">
+          <h3>Visual storytelling</h3>
+          <p>Used subtle motion and high-contrast accents to make important details stand out and guide visitors naturally through each page.</p>
         </article>
       </div>
+    </section>
+
+    <section class="panel content-section" id="current-job">
+      <h2 class="section-title">Current Job</h2>
+      <p>Currently focused on deepening front-end skills, experimenting with motion design, and building portfolio experiences that are both memorable and easy to navigate.</p>
+    </section>
+
+    <section class="panel content-section" id="projects">
+      <h2 class="section-title">Projects</h2>
+      <div class="cards">
+        <article class="card">
+          <h3>Portfolio Experience</h3>
+          <p>A landing page layout with smooth scroll, polished typography, and an animated text reveal for a strong first impression.</p>
+        </article>
+        <article class="card">
+          <h3>Interactive mini apps</h3>
+          <p>Mini applications with thoughtful UI details, simple navigation, and subtle animated backgrounds to bring the page to life.</p>
+        </article>
+        <article class="card">
+          <h3>Design system experiments</h3>
+          <p>Minimal themes using a structured palette, consistent spacing, and motion that feels intentional rather than noisy.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel content-section" id="skills">
+      <h2 class="section-title">Skills</h2>
+      <div class="cards">
+        <article class="card">
+          <h3>Front-end development</h3>
+          <p>HTML, CSS, responsive layout, motion design, and modern minimal styling.</p>
+        </article>
+        <article class="card">
+          <h3>Visual polish</h3>
+          <p>Creating designs with strong hierarchy, subtle animation, and calm contrast between black, red, and white.</p>
+        </article>
+        <article class="card">
+          <h3>Storytelling</h3>
+          <p>Crafting concise personal messaging and organizing portfolio content so the visitor can explore naturally.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel content-section" id="contact">
+      <h2 class="section-title">Contact</h2>
+      <p>If you want to add more pages or customize any section, I can help make it feel even cleaner and more polished. This page is ready to grow with your full portfolio content.</p>
     </section>
   </main>
+
   <script>
     const updateScroll = () => {
       document.body.style.setProperty('--scroll', window.scrollY);
