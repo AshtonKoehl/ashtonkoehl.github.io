@@ -99,31 +99,43 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      padding: 4px 10px;
+      padding: 4px;
       border-radius: 999px;
       overflow: hidden;
+      min-width: 420px;
+      position: relative;
       border: 1px solid rgba(255,255,255,.08);
-      background: rgba(255,255,255,.03);
     }
-    nav {
-      display: flex;
-      gap: 8px;
+    .nav-bar::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, #111 0%, #fff 22%, #cc0000 44%, #000 72%, #fff 100%);
+      opacity: .8;
+      filter: blur(2px);
+      transform: translateX(-100%);
+      animation: slideGradient 9s linear infinite;
+    }
+    .nav-bar::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(255,255,255,.16), transparent 30%, rgba(255,255,255,.08));
+      mix-blend-mode: screen;
     }
     nav a {
       position: relative;
       z-index: 1;
+      color: #fff;
       text-decoration: none;
       font-size: 0.94rem;
       font-weight: 600;
       text-transform: uppercase;
       padding: 14px 18px;
-      color: transparent;
-      background: linear-gradient(90deg, #cc0000 0%, #fff 24%, #000 55%, #fff 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      transition: transform .25s ease;
+      transition: color .25s ease, transform .25s ease;
     }
     nav a:hover {
+      color: #fffcff;
       transform: translateY(-1px);
     }
     main {
@@ -180,6 +192,33 @@
       display: grid;
       gap: 20px;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(180px, 240px) 1fr;
+      gap: 24px;
+      align-items: center;
+    }
+    .about-grid img {
+      width: 100%;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: 0 20px 60px rgba(0,0,0,.18);
+      object-fit: cover;
+      aspect-ratio: 1 / 1;
+      max-height: 320px;
+    }
+    .school-banner {
+      width: 100%;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: 0 20px 60px rgba(0,0,0,.18);
+    }
+    .school-banner img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
     }
     .card {
       padding: 24px;
@@ -272,6 +311,7 @@
         <a href="#about">About Me</a>
         <a href="#past-work">Past Work</a>
         <a href="#current-job">Current Job</a>
+        <a href="#education">Education</a>
         <a href="#projects">Projects</a>
         <a href="#skills">Skills</a>
         <a href="#contact">Contact</a>
@@ -294,7 +334,13 @@
 
     <section class="panel content-section" id="about">
       <h2 class="section-title">About Me</h2>
-      <p>Hi, I’m Ashton. I enjoy building clean web interfaces, exploring game design, and sharing what I learn through personal projects. My style is minimal, focused, and polished.</p>
+      <div class="about-grid">
+        <img src="images/headshot.png" alt="Headshot of Ashton Koehl" />
+        <div>
+          <p>Hi, I’m Ashton. I enjoy building clean web interfaces, exploring game design, and sharing what I learn through personal projects. My style is minimal, focused, and polished.</p>
+          <p>I like bringing strong visuals, subtle motion, and thoughtful details into every project to create memorable experiences.</p>
+        </div>
+      </div>
     </section>
 
     <section class="panel content-section" id="past-work">
@@ -318,6 +364,15 @@
     <section class="panel content-section" id="current-job">
       <h2 class="section-title">Current Job</h2>
       <p>Currently focused on deepening front-end skills, experimenting with motion design, and building portfolio experiences that are both memorable and easy to navigate.</p>
+    </section>
+
+    <section class="panel content-section" id="education">
+      <h2 class="section-title">Education</h2>
+      <p>Where I learned my foundation and grew my skills through coursework, projects, and collaboration.</p>
+      <div class="school-banner">
+        <img src="images/banner.png" alt="School banner image" />
+      </div>
+      <p>My education focused on practical development and creative problem solving, and this section highlights the place where I went to school.</p>
     </section>
 
     <section class="panel content-section" id="projects">
