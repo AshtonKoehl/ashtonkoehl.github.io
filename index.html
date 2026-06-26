@@ -39,19 +39,41 @@
       z-index: -1;
     }
     body::before {
-      background:
-        radial-gradient(circle at 12% 25%, rgba(124,156,255,.12) 0, transparent 16%),
-        radial-gradient(circle at 84% 12%, rgba(255,255,255,.08) 0, transparent 13%),
-        radial-gradient(circle at 26% 78%, rgba(124,156,255,.08) 0, transparent 18%);
-      opacity: .55;
+      background: radial-gradient(circle at top, rgba(84,90,138,.24), transparent 42%),
+                  radial-gradient(circle at 80% 12%, rgba(204,0,0,.18), transparent 12%),
+                  linear-gradient(180deg, rgba(15,18,34,.88) 0%, rgba(5,6,10,.96) 60%, rgba(0,0,0,1) 100%);
+      opacity: 1;
     }
     body::after {
       background-image:
-        radial-gradient(circle, rgba(255,255,255,.2) 1px, transparent 1px),
-        radial-gradient(circle, rgba(124,156,255,.12) 1px, transparent 1px);
-      background-size: 60px 60px, 92px 92px;
-      transform: translateY(calc(var(--scroll, 0) * 0.2px));
-      filter: blur(0.4px);
+        radial-gradient(circle at 4% 10%, rgba(255,255,255,.95) 1px, transparent 0),
+        radial-gradient(circle at 9% 25%, rgba(255,255,255,.7) 1px, transparent 0),
+        radial-gradient(circle at 13% 50%, rgba(255,255,255,.5) 0.7px, transparent 0),
+        radial-gradient(circle at 16% 82%, rgba(255,255,255,.4) 0.8px, transparent 0),
+        radial-gradient(circle at 21% 18%, rgba(255,255,255,.88) 1px, transparent 0),
+        radial-gradient(circle at 24% 44%, rgba(255,255,255,.66) 0.9px, transparent 0),
+        radial-gradient(circle at 28% 65%, rgba(255,255,255,.55) 0.85px, transparent 0),
+        radial-gradient(circle at 33% 10%, rgba(255,255,255,.8) 1px, transparent 0),
+        radial-gradient(circle at 37% 76%, rgba(255,255,255,.45) 0.75px, transparent 0),
+        radial-gradient(circle at 42% 34%, rgba(255,255,255,.65) 0.9px, transparent 0),
+        radial-gradient(circle at 47% 58%, rgba(255,255,255,.3) 0.7px, transparent 0),
+        radial-gradient(circle at 52% 86%, rgba(255,255,255,.55) 0.95px, transparent 0),
+        radial-gradient(circle at 58% 19%, rgba(255,255,255,.7) 1px, transparent 0),
+        radial-gradient(circle at 62% 43%, rgba(255,255,255,.45) 0.8px, transparent 0),
+        radial-gradient(circle at 66% 70%, rgba(255,255,255,.2) 0.6px, transparent 0),
+        radial-gradient(circle at 69% 32%, rgba(255,255,255,.78) 1px, transparent 0),
+        radial-gradient(circle at 73% 55%, rgba(255,255,255,.5) 0.75px, transparent 0),
+        radial-gradient(circle at 78% 11%, rgba(255,255,255,.6) 0.9px, transparent 0),
+        radial-gradient(circle at 82% 72%, rgba(255,255,255,.35) 0.8px, transparent 0),
+        radial-gradient(circle at 86% 29%, rgba(255,255,255,.3) 0.7px, transparent 0),
+        radial-gradient(circle at 90% 86%, rgba(255,255,255,.18) 0.6px, transparent 0),
+        radial-gradient(circle at 94% 53%, rgba(255,255,255,.5) 0.7px, transparent 0),
+        radial-gradient(circle at 58% 11%, rgba(255,255,255,.68) 0.9px, transparent 0),
+        radial-gradient(circle at 35% 91%, rgba(255,255,255,.25) 0.6px, transparent 0);
+      background-repeat: repeat;
+      transform: translateY(calc(var(--scroll, 0) * 0.35px));
+      filter: blur(0.08px);
+      opacity: 1;
     }
     header {
       position: fixed;
@@ -59,7 +81,7 @@
       z-index: 20;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
       gap: 18px;
       padding: 18px 24px;
       backdrop-filter: blur(18px);
@@ -77,43 +99,31 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      padding: 4px;
+      padding: 4px 10px;
       border-radius: 999px;
       overflow: hidden;
-      min-width: 420px;
-      position: relative;
       border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.03);
     }
-    .nav-bar::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, #111 0%, #fff 22%, #cc0000 44%, #000 72%, #fff 100%);
-      opacity: .8;
-      filter: blur(2px);
-      transform: translateX(-100%);
-      animation: slideGradient 9s linear infinite;
-    }
-    .nav-bar::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, rgba(255,255,255,.16), transparent 30%, rgba(255,255,255,.08));
-      mix-blend-mode: screen;
+    nav {
+      display: flex;
+      gap: 8px;
     }
     nav a {
       position: relative;
       z-index: 1;
-      color: #fff;
       text-decoration: none;
       font-size: 0.94rem;
       font-weight: 600;
       text-transform: uppercase;
       padding: 14px 18px;
-      transition: color .25s ease, transform .25s ease;
+      color: transparent;
+      background: linear-gradient(90deg, #cc0000 0%, #fff 24%, #000 55%, #fff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      transition: transform .25s ease;
     }
     nav a:hover {
-      color: #fffcff;
       transform: translateY(-1px);
     }
     main {
@@ -256,7 +266,7 @@
 </head>
 <body>
   <header>
-    <div class="brand">Ashton Koehl</div>
+    <div class="brand">Portfolio</div>
     <div class="nav-bar">
       <nav>
         <a href="#about">About Me</a>
