@@ -116,6 +116,10 @@
       text-decoration: none;
     }
     .header-actions {
+      --nav-w: 280px;
+      --slide-duration: .32s;
+      --drop-duration: .42s;
+      --close-duration: .1s;
       display: flex;
       align-items: center;
       gap: 12px;
@@ -132,41 +136,109 @@
       background: rgba(255,255,255,.08);
       color: var(--text);
       cursor: pointer;
-      transition: background .2s ease, transform .2s ease;
+      transition: background .2s ease, transform .2s ease, border-radius .2s ease;
     }
     .menu-button:hover,
     .theme-button:hover {
       transform: translateY(-1px);
       background: rgba(255,255,255,.14);
     }
+    .theme-button {
+      transition: background .2s ease, transform .2s ease, opacity .3s ease var(--close-duration);
+    }
+    .header-actions.menu-open .theme-button {
+      opacity: 0;
+      pointer-events: none;
+      transition: background .2s ease, transform .2s ease, opacity .3s ease;
+    }
+    /* Opening is a two-step move: the button slides left into a full-width
+       cap that becomes the "About Me" link, then the rest of the list
+       drops open beneath it. Closing collapses everything at once and
+       fast, so the small button reappears almost instantly; the dark-mode
+       button waits for that close to finish before fading back in. */
     .nav-bar {
+      position: relative;
+      width: 42px;
+      height: 42px;
+    }
+    .menu-button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 2;
+      overflow: hidden;
+      transition: background .2s ease, transform .2s ease, border-radius .2s ease,
+                  width var(--close-duration) ease;
+    }
+    .menu-icon,
+    .menu-label {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+      transition: opacity .2s ease;
+    }
+    .menu-icon {
+      justify-content: center;
+    }
+    .menu-label {
+      justify-content: flex-start;
+      padding-left: 18px;
+      opacity: 0;
+      font-size: 0.94rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+    .nav-bar.open .menu-button {
+      width: var(--nav-w);
+      transition: background .2s ease, transform .2s ease, border-radius .2s ease,
+                  width var(--slide-duration) cubic-bezier(.4,0,.2,1);
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      border-bottom-color: transparent;
+      background: var(--panel-bg);
+    }
+    .nav-bar.open .menu-icon {
+      opacity: 0;
+    }
+    .nav-bar.open .menu-label {
+      opacity: 1;
+      transition-delay: .12s;
+    }
+    .nav-menu {
       position: absolute;
       top: 100%;
-      left: 18px;
-      right: 18px;
-      width: auto;
+      right: 0;
+      width: var(--nav-w);
       max-height: 0;
       overflow: hidden;
       opacity: 0;
       pointer-events: none;
-      transition: max-height .32s ease, opacity .24s ease;
-      border-radius: 22px;
+      transform-origin: top;
+      transform: scaleY(0.96);
+      transition: transform var(--close-duration) ease,
+                  opacity var(--close-duration) ease,
+                  max-height var(--close-duration) ease;
+      display: flex;
+      flex-direction: column;
       border: 1px solid var(--card-border);
+      border-top: none;
+      border-radius: 0 0 14px 14px;
       background: var(--panel-bg);
       backdrop-filter: blur(16px);
       box-shadow: 0 24px 80px rgba(0,0,0,.18);
-      z-index: 22;
+      z-index: 1;
     }
-    .nav-bar.open {
+    .nav-bar.open .nav-menu {
       max-height: 520px;
       opacity: 1;
       pointer-events: auto;
-    }
-    .nav-bar .nav-menu {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      width: 100%;
+      transform: scaleY(1);
+      transition: transform var(--drop-duration) cubic-bezier(.4,0,.2,1) var(--slide-duration),
+                  opacity .3s ease var(--slide-duration),
+                  max-height var(--drop-duration) cubic-bezier(.4,0,.2,1) var(--slide-duration);
     }
     nav a {
       position: relative;
@@ -202,9 +274,7 @@
         display: inline-flex;
       }
       .nav-bar {
-        width: calc(100% - 36px);
-        min-width: auto;
-        margin-top: 16px;
+        --nav-w: calc(100vw - 36px);
       }
       main { padding: 170px 18px 48px; }
     }
@@ -517,10 +587,6 @@
       to { transform: translateX(100%); }
     }
     @media (max-width: 960px) {
-      .nav-bar {
-        min-width: 100%;
-        flex-wrap: wrap;
-      }
       nav a {
         padding: 12px 14px;
       }
@@ -539,18 +605,20 @@
     <a class="brand" href="#hero">Portfolio</a>
     <div class="header-actions">
       <button class="theme-button" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
-      <button class="menu-button" id="menuToggle" aria-expanded="false" aria-label="Open navigation menu">☰</button>
-    </div>
-    <div class="nav-bar" id="navBar">
-      <nav class="nav-menu">
-        <a href="#about">About Me</a>
-        <a href="#past-work">Past Work</a>
-        <a href="#education">Education</a>
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-        <a href="#current-job">Current Job</a>
-        <a href="#contact">Contact</a>
-      </nav>
+      <div class="nav-bar" id="navBar">
+        <button class="menu-button" id="menuToggle" aria-expanded="false" aria-label="Open navigation menu" aria-controls="navMenu">
+          <span class="menu-icon">☰</span>
+          <span class="menu-label">About Me</span>
+        </button>
+        <nav class="nav-menu" id="navMenu">
+          <a href="#past-work">Past Work</a>
+          <a href="#education">Education</a>
+          <a href="#projects">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="#current-job">Current Job</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
     </div>
   </header>
 
@@ -695,6 +763,7 @@
     const themeToggle = document.getElementById('themeToggle');
     const menuToggle = document.getElementById('menuToggle');
     const navBar = document.getElementById('navBar');
+    const headerActions = document.querySelector('.header-actions');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const savedTheme = localStorage.getItem('theme');
 
@@ -717,20 +786,34 @@
       setTheme(nextTheme);
     });
 
+    const setMenuOpen = (open) => {
+      navBar.classList.toggle('open', open);
+      menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      menuToggle.setAttribute('aria-label', open ? 'Go to About Me' : 'Open navigation menu');
+      headerActions.classList.toggle('menu-open', open);
+      themeToggle.setAttribute('aria-hidden', open ? 'true' : 'false');
+      themeToggle.tabIndex = open ? -1 : 0;
+    };
+
     menuToggle.addEventListener('click', () => {
-      const opened = navBar.classList.toggle('open');
-      menuToggle.setAttribute('aria-expanded', opened ? 'true' : 'false');
-      menuToggle.setAttribute('aria-label', opened ? 'Close navigation menu' : 'Open navigation menu');
+      if (navBar.classList.contains('open')) {
+        setMenuOpen(false);
+        window.location.hash = 'about';
+      } else {
+        setMenuOpen(true);
+      }
     });
 
     document.querySelectorAll('.nav-menu a').forEach((link) => {
       link.addEventListener('click', () => {
-        if (navBar.classList.contains('open')) {
-          navBar.classList.remove('open');
-          menuToggle.setAttribute('aria-expanded', 'false');
-          menuToggle.setAttribute('aria-label', 'Open navigation menu');
-        }
+        if (navBar.classList.contains('open')) setMenuOpen(false);
       });
+    });
+
+    document.addEventListener('click', (event) => {
+      if (navBar.classList.contains('open') && !navBar.contains(event.target)) {
+        setMenuOpen(false);
+      }
     });
 
     const formSuccess = document.getElementById('formSuccess');
