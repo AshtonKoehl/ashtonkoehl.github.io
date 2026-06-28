@@ -357,15 +357,120 @@
       transition: transform .2s ease, background .2s ease;
       box-shadow: 0 20px 50px rgba(124,156,255,.12);
     }
+    .contact-form button.preview {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow: none;
+    }
     .contact-form button:hover {
       transform: translateY(-1px);
       background: #8fa8ff;
+    }
+    .form-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin-top: 12px;
+    }
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.45);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+      padding: 24px;
+    }
+    .modal-backdrop.show {
+      display: flex;
+    }
+    .modal {
+      width: min(520px, 100%);
+      background: #2b2f35;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: 0 28px 90px rgba(0,0,0,.32);
+      color: var(--text);
+      text-align: left;
+      position: relative;
+    }
+    .modal.success {
+      /* Darker gray border; remove the green outline/glow */
+      border-color: #1f2428;
+      background: #2b2f35;
+      box-shadow: 0 18px 60px rgba(0,0,0,.35);
+    }
+    .modal.error {
+      /* Match success card styling but use red text for messaging */
+      border-color: #1f2428;
+      background: #2b2f35;
+      box-shadow: 0 18px 60px rgba(0,0,0,.35);
+    }
+    .modal-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 36px;
+      height: 36px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(255,255,255,.08);
+      color: var(--text);
+      cursor: pointer;
+      font-size: 1.1rem;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s ease, transform .2s ease;
+    }
+    .modal-close:hover {
+      background: rgba(255,255,255,.16);
+      transform: translateY(-1px);
+    }
+    .modal h3 {
+      margin: 0 0 12px;
+      font-size: 1.25rem;
+    }
+    .modal p {
+      margin: 0 0 20px;
+      line-height: 1.6;
+      color: var(--text);
+    }
+    .modal.success h3 {
+      color: #00e676; /* Success Bright Green */
+    }
+    .modal.success p {
+      color: #ffffff; /* lighter bright green for body text */
+    }
+    .modal.error h3 {
+      color: #ff5252; /* bright error red */
+    }
+    .modal.error p {
+      color: #ffdede; /* light red body */
     }
     .contact-form .hint {
       margin: 0;
       color: var(--muted);
       font-size: 0.94rem;
       line-height: 1.6;
+    }
+    .form-success {
+      display: none;
+      padding: 18px 22px;
+      border-radius: 18px;
+      background: rgba(124,156,255,.16);
+      border: 1px solid rgba(124,156,255,.32);
+      color: #eaf1ff;
+      font-size: 0.98rem;
+      line-height: 1.6;
+    }
+    .form-success.show {
+      display: block;
     }
     .scroll-hint {
       margin-top: 1rem;
@@ -545,7 +650,9 @@
       <form class="contact-form" action="https://formsubmit.co/koehlashton@gmail.com" method="POST">
         <input type="hidden" name="_subject" value="New portfolio inquiry" />
         <input type="hidden" name="_captcha" value="false" />
-        <input type="hidden" name="_next" value="https://ashtonkoehl.github.io/#contact" />
+        <input type="hidden" name="_next" value="https://ashtonkoehl.github.io/?sent=1#contact" />
+        <input type="hidden" name="_error" value="https://ashtonkoehl.github.io/?error=1#contact" />
+        <div class="form-success" id="formSuccess">Thanks! Your message has been sent and I will get back to you soon.</div>
         <label>
           Your Name
           <input type="text" name="name" required placeholder="Jane Doe" />
@@ -562,11 +669,21 @@
           Message
           <textarea name="message" required placeholder="Tell me about your project..."></textarea>
         </label>
-        <p class="hint">Your message will be emailed to koehlashton@gmail.com. Form submissions are handled securely by FormSubmit.</p>
-        <button type="submit">Send Message</button>
+        <p class="hint">Your message will be emailed to Ashton. Form submissions are handled securely by FormSubmit.</p>
+        <div class="form-actions">
+          <button type="submit">Send Message</button>
+        </div>
       </form>
     </section>
   </main>
+
+  <div class="modal-backdrop" id="submitModal" aria-hidden="true">
+    <div class="modal" role="alertdialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalText">
+      <button class="modal-close" id="closeModal" aria-label="Close message">×</button>
+      <h3 id="modalTitle">Message sent</h3>
+      <p id="modalText">Thanks! Your message has been sent and I will get back to you soon.</p>
+    </div>
+  </div>
 
   <script>
     const updateScroll = () => {
@@ -615,6 +732,55 @@
         }
       });
     });
+
+    const formSuccess = document.getElementById('formSuccess');
+    const submitModal = document.getElementById('submitModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalText = document.getElementById('modalText');
+    const closeModal = document.getElementById('closeModal');
+
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('sent') === '1') {
+      formSuccess?.classList.add('show');
+      showSubmitModal('success');
+    }
+    if (params.get('error') === '1') {
+      showSubmitModal('error');
+    }
+
+    // Preview button removed — use actual form submission to test flows
+
+    closeModal?.addEventListener('click', () => {
+      submitModal.classList.remove('show');
+      submitModal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    });
+
+    submitModal?.addEventListener('click', (event) => {
+      if (event.target === submitModal) {
+        closeModal?.click();
+      }
+    });
+
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && submitModal.classList.contains('show')) {
+        closeModal?.click();
+      }
+    });
+
+    const showSubmitModal = (type) => {
+      const isSuccess = type === 'success';
+      modalTitle.textContent = isSuccess ? 'Message sent' : 'Submission failed';
+      modalText.textContent = isSuccess
+        ? 'Your message has been received and I will get back to you soon.'
+        : 'There was an issue sending your message. Please try again in a moment.';
+      submitModal.classList.add('show');
+      submitModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      const modal = submitModal.querySelector('.modal');
+      modal.classList.toggle('success', isSuccess);
+      modal.classList.toggle('error', !isSuccess);
+    };
   </script>
 </body>
 </html>
