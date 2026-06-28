@@ -17,7 +17,26 @@
       --muted: rgba(246,247,251,.72);
       --accent: #7c9cff;
       --accent-strong: #cc0000;
+      --panel-bg: rgba(255,255,255,.05);
+      --panel-border: rgba(255,255,255,.08);
+      --header-bg: rgba(5,6,10,.88);
+      --card-bg: rgba(255,255,255,.03);
+      --card-border: rgba(255,255,255,.08);
       --dot: rgba(255,255,255,.16);
+    }
+    .light-mode {
+      --bg: #f4f5fb;
+      --surface: rgba(0,0,0,.04);
+      --text: #08111f;
+      --muted: rgba(18,24,43,.64);
+      --accent: #7c9cff;
+      --accent-strong: #cc0000;
+      --panel-bg: rgba(255,255,255,.9);
+      --panel-border: rgba(0,0,0,.08);
+      --header-bg: rgba(255,255,255,.9);
+      --card-bg: rgba(255,255,255,.95);
+      --card-border: rgba(0,0,0,.1);
+      --dot: rgba(18,24,43,.14);
     }
     *, *::before, *::after { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -81,11 +100,11 @@
       z-index: 20;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
       gap: 18px;
-      padding: 18px 24px;
+      padding: 10px 24px 16px;
       backdrop-filter: blur(18px);
-      background: rgba(5,6,10,.88);
+      background: var(--header-bg);
       border-bottom: 1px solid rgba(255,255,255,.06);
     }
     .brand {
@@ -94,49 +113,100 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--text);
+      text-decoration: none;
     }
-    .nav-bar {
+    .header-actions {
       display: flex;
       align-items: center;
-      gap: 8px;
-      padding: 4px;
-      border-radius: 999px;
+      gap: 12px;
+    }
+    .menu-button,
+    .theme-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 14px;
+      background: rgba(255,255,255,.08);
+      color: var(--text);
+      cursor: pointer;
+      transition: background .2s ease, transform .2s ease;
+    }
+    .menu-button:hover,
+    .theme-button:hover {
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.14);
+    }
+    .nav-bar {
+      position: absolute;
+      top: 100%;
+      left: 18px;
+      right: 18px;
+      width: auto;
+      max-height: 0;
       overflow: hidden;
-      min-width: 420px;
-      position: relative;
-      border: 1px solid rgba(255,255,255,.08);
+      opacity: 0;
+      pointer-events: none;
+      transition: max-height .32s ease, opacity .24s ease;
+      border-radius: 22px;
+      border: 1px solid var(--card-border);
+      background: var(--panel-bg);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 24px 80px rgba(0,0,0,.18);
+      z-index: 22;
     }
-    .nav-bar::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, #111 0%, #fff 22%, #cc0000 44%, #000 72%, #fff 100%);
-      opacity: .8;
-      filter: blur(2px);
-      transform: translateX(-100%);
-      animation: slideGradient 9s linear infinite;
+    .nav-bar.open {
+      max-height: 520px;
+      opacity: 1;
+      pointer-events: auto;
     }
-    .nav-bar::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, rgba(255,255,255,.16), transparent 30%, rgba(255,255,255,.08));
-      mix-blend-mode: screen;
+    .nav-bar .nav-menu {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      width: 100%;
     }
     nav a {
       position: relative;
       z-index: 1;
-      color: #fff;
+      color: var(--text);
       text-decoration: none;
       font-size: 0.94rem;
       font-weight: 600;
       text-transform: uppercase;
       padding: 14px 18px;
-      transition: color .25s ease, transform .25s ease;
+      transition: color .25s ease, transform .25s ease, background .25s ease;
+      border-bottom: 1px solid rgba(255,255,255,.08);
     }
     nav a:hover {
       color: #fffcff;
       transform: translateY(-1px);
+      background: rgba(255,255,255,.06);
+    }
+    nav a:last-child {
+      border-bottom: none;
+    }
+    @media (max-width: 760px) {
+      header {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 16px 18px;
+      }
+      .header-actions {
+        justify-content: space-between;
+        width: 100%;
+      }
+      .menu-button {
+        display: inline-flex;
+      }
+      .nav-bar {
+        width: calc(100% - 36px);
+        min-width: auto;
+        margin-top: 16px;
+      }
+      main { padding: 170px 18px 48px; }
     }
     main {
       position: relative;
@@ -149,6 +219,7 @@
       width: min(1100px, 100%);
       display: grid;
       gap: 48px;
+      scroll-margin-top: 96px;
     }
     .hero-title {
       margin: 0;
@@ -258,7 +329,7 @@
     }
     section.content-section {
       margin-top: 64px;
-      scroll-margin-top: 150px;
+      scroll-margin-top: 96px;
     }
     .section-title {
       display: inline-flex;
@@ -306,8 +377,12 @@
 <body>
   <header>
     <a class="brand" href="#hero">Portfolio</a>
-    <div class="nav-bar">
-      <nav>
+    <div class="header-actions">
+      <button class="theme-button" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+      <button class="menu-button" id="menuToggle" aria-expanded="false" aria-label="Open navigation menu">☰</button>
+    </div>
+    <div class="nav-bar" id="navBar">
+      <nav class="nav-menu">
         <a href="#about">About Me</a>
         <a href="#past-work">Past Work</a>
         <a href="#education">Education</a>
@@ -421,6 +496,47 @@
     };
     window.addEventListener('scroll', updateScroll, { passive: true });
     updateScroll();
+
+    const themeToggle = document.getElementById('themeToggle');
+    const menuToggle = document.getElementById('menuToggle');
+    const navBar = document.getElementById('navBar');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const savedTheme = localStorage.getItem('theme');
+
+    const setTheme = (mode) => {
+      if (mode === 'light') {
+        document.documentElement.classList.add('light-mode');
+        themeToggle.textContent = '🌙';
+      } else {
+        document.documentElement.classList.remove('light-mode');
+        themeToggle.textContent = '☀️';
+      }
+      localStorage.setItem('theme', mode);
+    };
+
+    const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+    setTheme(currentTheme);
+
+    themeToggle.addEventListener('click', () => {
+      const nextTheme = document.documentElement.classList.contains('light-mode') ? 'dark' : 'light';
+      setTheme(nextTheme);
+    });
+
+    menuToggle.addEventListener('click', () => {
+      const opened = navBar.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', opened ? 'true' : 'false');
+      menuToggle.setAttribute('aria-label', opened ? 'Close navigation menu' : 'Open navigation menu');
+    });
+
+    document.querySelectorAll('.nav-menu a').forEach((link) => {
+      link.addEventListener('click', () => {
+        if (navBar.classList.contains('open')) {
+          navBar.classList.remove('open');
+          menuToggle.setAttribute('aria-expanded', 'false');
+          menuToggle.setAttribute('aria-label', 'Open navigation menu');
+        }
+      });
+    });
   </script>
 </body>
 </html>
