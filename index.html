@@ -312,6 +312,61 @@
       font-size: 0.97rem;
       line-height: 1.75;
     }
+    .contact-form {
+      display: grid;
+      gap: 18px;
+      margin-top: 16px;
+    }
+    .contact-form label {
+      display: grid;
+      gap: 8px;
+      color: var(--text);
+      font-size: 0.98rem;
+      font-weight: 600;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 18px;
+      padding: 16px 18px;
+      background: rgba(255,255,255,.05);
+      color: var(--text);
+      font: inherit;
+      transition: border-color .2s ease, background .2s ease;
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: rgba(124,156,255,.9);
+      background: rgba(255,255,255,.08);
+    }
+    .contact-form textarea {
+      min-height: 200px;
+      resize: vertical;
+    }
+    .contact-form button {
+      align-self: flex-start;
+      border: none;
+      border-radius: 18px;
+      padding: 16px 24px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform .2s ease, background .2s ease;
+      box-shadow: 0 20px 50px rgba(124,156,255,.12);
+    }
+    .contact-form button:hover {
+      transform: translateY(-1px);
+      background: #8fa8ff;
+    }
+    .contact-form .hint {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.6;
+    }
     .scroll-hint {
       margin-top: 1rem;
       display: inline-flex;
@@ -486,7 +541,30 @@
 
     <section class="panel content-section" id="contact">
       <h2 class="section-title">Contact</h2>
-      <p>If you want to add more pages or customize any section, I can help make it feel even cleaner and more polished. This page is ready to grow with your full portfolio content.</p>
+      <p>Want to hire Ashton? Submit the form below and a message will be sent directly to Ashton.</p>
+      <form class="contact-form" action="https://formsubmit.co/koehlashton@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="New portfolio inquiry" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_next" value="https://ashtonkoehl.github.io/#contact" />
+        <label>
+          Your Name
+          <input type="text" name="name" required placeholder="Jane Doe" />
+        </label>
+        <label>
+          Company
+          <input type="text" name="company" placeholder="Acme Inc." />
+        </label>
+        <label>
+          Email
+          <input type="email" name="email" required placeholder="you@example.com" />
+        </label>
+        <label>
+          Message
+          <textarea name="message" required placeholder="Tell me about your project..."></textarea>
+        </label>
+        <p class="hint">Your message will be emailed to koehlashton@gmail.com. Form submissions are handled securely by FormSubmit.</p>
+        <button type="submit">Send Message</button>
+      </form>
     </section>
   </main>
 
