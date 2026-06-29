@@ -546,28 +546,56 @@ main {
   line-height: 1.75;
 }
 #past-work .card {
+  padding: 18px;
   cursor: pointer;
+}
+#past-work .card h3 {
+  margin: 0 0 8px;
+}
+#past-work .card p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
 }
 #past-work .card:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
+.modal-project-layout {
+  display: grid;
+  gap: 16px;
+}
 .modal-project-image {
   display: block;
   width: 100%;
-  height: 260px;
+  max-height: 280px;
   object-fit: contain;
   background: rgba(var(--overlay-rgb),.04);
   border: 1px solid var(--card-border);
   border-radius: 16px;
-  margin-bottom: 8px;
 }
-.modal-project-image[hidden],
+.modal-project-image[hidden] {
+  display: none;
+}
+.modal-project-body {
+  display: grid;
+  gap: 12px;
+}
+.modal-project-body h3 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+.modal-project-body p {
+  margin: 0;
+  color: var(--text);
+  line-height: 1.65;
+}
 .modal-project-credit[hidden] {
   display: none;
 }
 .modal p.modal-project-credit {
-  margin: 0 0 16px;
+  margin: 0;
   color: var(--muted);
   font-size: 0.78rem;
   font-style: italic;
