@@ -396,6 +396,17 @@ main {
 .skill-group:first-of-type {
   margin-top: 0;
 }
+.edu-work-group {
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid var(--card-border);
+}
+.edu-work-desc {
+  margin: 8px 0 12px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
 .skill-group-label {
   display: block;
   margin-bottom: 8px;
@@ -531,6 +542,47 @@ main {
   background: var(--surface);
   transition: transform .28s ease, border-color .28s ease;
 }
+.cert-card {
+  padding: 16px 18px;
+  border-radius: 18px;
+  border: 1px solid var(--card-border);
+  background: var(--surface);
+  display: grid;
+  gap: 6px;
+  transition: transform .28s ease, border-color .28s ease;
+}
+.cert-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(124,156,255,.35);
+}
+.cert-issuer {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.cert-name {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-strong);
+  line-height: 1.35;
+}
+.cert-meta {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+.cert-desc {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.65;
+}
+.cert-tags {
+  margin-top: 4px;
+}
 .card:hover {
   transform: translateY(-6px);
   border-color: rgba(204,0,0,.35);
@@ -557,6 +609,21 @@ main {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
   overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+}
+#past-work .card::after {
+  content: "View details →";
+  display: block;
+  margin-top: 14px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+  transition: transform .28s ease;
+}
+#past-work .card:hover::after {
+  transform: translateX(5px);
 }
 #past-work .card:focus-visible {
   outline: 2px solid var(--accent);
