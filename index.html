@@ -57,15 +57,15 @@
     <section class="panel content-section" id="past-work">
       <h2 class="section-title">Past Work</h2>
       <div class="cards">
-        <article class="card">
+        <article class="card" tabindex="0" role="button" aria-haspopup="dialog" data-image="images/xv6.png" data-credit="Image taken from Medium.com">
           <h3>XV6 Riscv OS</h3>
           <p>Developed and enhanced the xv6-riscv educational operating system to strengthen my understanding of operating system concepts and low-level programming. Implemented and modified core kernel functionality, including process management, memory management, system calls, and scheduling algorithms. This project provided experience with C programming, debugging, concurrency, and the interaction between hardware and software at the operating system level.</p>
         </article>
-        <article class="card">
+        <article class="card" tabindex="0" role="button" aria-haspopup="dialog">
           <h3>Gambling Website</h3>
           <p>Designed and developed a full-stack online gambling website featuring interactive casino-style games, secure user authentication, and real-time account management. Built both the front-end and back-end while integrating databases to store user accounts, balances, and game history. Focused on creating a responsive user interface, efficient server-side logic, and scalable architecture while applying best practices in web development and software design.</p>
         </article>
-        <article class="card">
+        <article class="card" tabindex="0" role="button" aria-haspopup="dialog" data-image="images/horse-site.png" data-credit="Image taken from Medium.com">
           <h3>Horse Race Betting App</h3>
           <p>Created a web-based horse racing betting platform that allows users to view race information, place bets, and track betting results. Developed features including user authentication, dynamic race listings, betting logic, and database integration for storing user and wager information. This project strengthened my experience with full-stack development, database management, API integration, and creating intuitive, data-driven web applications.</p>
         </article>
@@ -76,11 +76,65 @@
 
     <section class="panel content-section" id="education">
       <h2 class="section-title">Education</h2>
-      <p>Where I learned my foundation and grew my skills through coursework, projects, and collaboration.</p>
+
       <div class="school-banner">
         <img src="images/banner.png" alt="School banner image" />
       </div>
-      <p>My education focused on practical development and creative problem solving, and this section highlights the place where I went to school.</p>
+
+      <div class="education-header">
+        <h3 class="education-degree">Bachelor of Science in Computer Science</h3>
+        <p class="education-meta">University of Nevada, Las Vegas (UNLV) <span class="meta-dot">•</span> Graduated 2025</p>
+      </div>
+
+      <p>My education provided a strong foundation in software engineering, algorithms, operating systems, databases, artificial intelligence, and data analysis. Through hands-on projects and coursework, I developed the skills to design software, solve complex problems, and quickly adapt to new technologies.</p>
+
+      <div class="cards education-grid">
+        <article class="card">
+          <h3>Relevant Coursework</h3>
+          <ul class="tag-list">
+            <li>Data Structures &amp; Algorithms</li>
+            <li>Operating Systems</li>
+            <li>Database Systems</li>
+            <li>Software Engineering</li>
+            <li>Artificial Intelligence</li>
+            <li>Computer Networks</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Skills Developed</h3>
+          <div class="skill-group">
+            <span class="skill-group-label">Languages</span>
+            <ul class="tag-list">
+              <li>Python</li>
+              <li>Java</li>
+              <li>C/C++</li>
+              <li>JavaScript</li>
+              <li>SQL</li>
+              <li>LUA</li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <span class="skill-group-label">Tools</span>
+            <ul class="tag-list">
+              <li>Git</li>
+              <li>GitHub</li>
+              <li>Linux</li>
+              <li>Node.js</li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <span class="skill-group-label">Concepts</span>
+            <ul class="tag-list">
+              <li>Object-Oriented Programming</li>
+              <li>Data Structures</li>
+              <li>Algorithms</li>
+              <li>API Development</li>
+              <li>Database Design</li>
+              <li>Data Analysis</li>
+            </ul>
+          </div>
+        </article>
+      </div>
     </section>
 
     <section class="panel content-section" id="projects">
@@ -189,6 +243,16 @@
       <button class="modal-close" id="closeModal" aria-label="Close message">×</button>
       <h3 id="modalTitle">Message sent</h3>
       <p id="modalText">Thanks! Your message has been sent and I will get back to you soon.</p>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="projectModal" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="projectModalTitle">
+      <button class="modal-close" id="closeProjectModal" aria-label="Close project details">×</button>
+      <img class="modal-project-image" id="projectModalImage" alt="" />
+      <p class="modal-project-credit" id="projectModalCredit"></p>
+      <h3 id="projectModalTitle"></h3>
+      <p id="projectModalText"></p>
     </div>
   </div>
 

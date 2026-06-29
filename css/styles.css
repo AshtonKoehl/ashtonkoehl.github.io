@@ -372,6 +372,56 @@ main {
   display: block;
   object-fit: cover;
 }
+.education-header {
+  display: grid;
+  gap: 4px;
+}
+.education-degree {
+  margin: 0;
+  font-size: 1.3rem;
+  color: var(--text-strong);
+}
+.education-meta {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+.education-meta .meta-dot {
+  margin: 0 8px;
+  opacity: .6;
+}
+.skill-group {
+  margin-top: 16px;
+}
+.skill-group:first-of-type {
+  margin-top: 0;
+}
+.skill-group-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.tag-list li {
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(var(--overlay-rgb),.06);
+  border: 1px solid var(--card-border);
+  color: var(--text);
+  font-size: 0.84rem;
+  line-height: 1.4;
+}
 .github-charts {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -494,6 +544,33 @@ main {
   color: var(--muted);
   font-size: 0.97rem;
   line-height: 1.75;
+}
+#past-work .card {
+  cursor: pointer;
+}
+#past-work .card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.modal-project-image {
+  display: block;
+  width: 100%;
+  height: 260px;
+  object-fit: contain;
+  background: rgba(var(--overlay-rgb),.04);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  margin-bottom: 8px;
+}
+.modal-project-image[hidden],
+.modal-project-credit[hidden] {
+  display: none;
+}
+.modal p.modal-project-credit {
+  margin: 0 0 16px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-style: italic;
 }
 .contact-form {
   display: grid;

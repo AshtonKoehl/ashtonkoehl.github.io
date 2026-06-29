@@ -110,6 +110,70 @@ const showSubmitModal = (type) => {
   modal.classList.toggle('error', !isSuccess);
 };
 
+const projectModal = document.getElementById('projectModal');
+const projectModalImage = document.getElementById('projectModalImage');
+const projectModalCredit = document.getElementById('projectModalCredit');
+const projectModalTitle = document.getElementById('projectModalTitle');
+const projectModalText = document.getElementById('projectModalText');
+const closeProjectModal = document.getElementById('closeProjectModal');
+let lastFocusedCard = null;
+
+const openProjectModal = (card) => {
+  projectModalTitle.textContent = card.querySelector('h3')?.textContent ?? '';
+  projectModalText.textContent = card.querySelector('p')?.textContent ?? '';
+
+  const image = card.dataset.image;
+  if (image) {
+    projectModalImage.src = image;
+    projectModalImage.alt = card.querySelector('h3')?.textContent ?? '';
+    projectModalImage.hidden = false;
+  } else {
+    projectModalImage.removeAttribute('src');
+    projectModalImage.hidden = true;
+  }
+
+  const credit = card.dataset.credit;
+  projectModalCredit.textContent = credit ?? '';
+  projectModalCredit.hidden = !credit;
+
+  lastFocusedCard = card;
+  projectModal.classList.add('show');
+  projectModal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  closeProjectModal?.focus();
+};
+
+const closeProjectModalFn = () => {
+  projectModal.classList.remove('show');
+  projectModal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+  lastFocusedCard?.focus();
+};
+
+document.querySelectorAll('#past-work .card').forEach((card) => {
+  card.addEventListener('click', () => openProjectModal(card));
+  card.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      openProjectModal(card);
+    }
+  });
+});
+
+closeProjectModal?.addEventListener('click', closeProjectModalFn);
+
+projectModal?.addEventListener('click', (event) => {
+  if (event.target === projectModal) {
+    closeProjectModalFn();
+  }
+});
+
+window.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && projectModal.classList.contains('show')) {
+    closeProjectModalFn();
+  }
+});
+
 const CONTRIB_LEVEL_ALPHA = [0, 0.3, 0.5, 0.72, 1];
 
 const contribTooltip = document.createElement('div');
