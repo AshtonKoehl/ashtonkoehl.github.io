@@ -4,6 +4,12 @@ const updateScroll = () => {
 window.addEventListener('scroll', updateScroll, { passive: true });
 updateScroll();
 
+document.querySelector('.brand').addEventListener('click', (e) => {
+  e.preventDefault();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  history.replaceState(null, '', location.pathname);
+});
+
 const themeToggle = document.getElementById('themeToggle');
 const menuToggle = document.getElementById('menuToggle');
 const navBar = document.getElementById('navBar');
@@ -115,12 +121,22 @@ const projectModalImage = document.getElementById('projectModalImage');
 const projectModalCredit = document.getElementById('projectModalCredit');
 const projectModalTitle = document.getElementById('projectModalTitle');
 const projectModalText = document.getElementById('projectModalText');
+const projectModalTags = document.getElementById('projectModalTags');
 const closeProjectModal = document.getElementById('closeProjectModal');
 let lastFocusedCard = null;
 
 const openProjectModal = (card) => {
   projectModalTitle.textContent = card.querySelector('h3')?.textContent ?? '';
-  projectModalText.textContent = card.querySelector('p')?.textContent ?? '';
+  projectModalText.textContent = card.dataset.description ?? card.querySelector('p')?.textContent ?? '';
+
+  projectModalTags.innerHTML = '';
+  const tags = card.dataset.tags ? card.dataset.tags.split(',') : [];
+  tags.forEach((tag) => {
+    const li = document.createElement('li');
+    li.textContent = tag.trim();
+    projectModalTags.appendChild(li);
+  });
+  projectModalTags.hidden = tags.length === 0;
 
   const image = card.dataset.image;
   if (image) {
@@ -150,7 +166,7 @@ const closeProjectModalFn = () => {
   lastFocusedCard?.focus();
 };
 
-document.querySelectorAll('#past-work .card').forEach((card) => {
+document.querySelectorAll('#past-work .card, #certifications .cert-card').forEach((card) => {
   card.addEventListener('click', () => openProjectModal(card));
   card.addEventListener('keydown', (event) => {
     if (event.key === 'Enter' || event.key === ' ') {

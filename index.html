@@ -13,7 +13,7 @@
 </head>
 <body>
   <header>
-    <a class="brand" href="#hero">Portfolio</a>
+    <a class="brand" href="#">Portfolio</a>
     <div class="header-actions">
       <button class="theme-button" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
       <div class="nav-bar" id="navBar">
@@ -97,8 +97,8 @@
             <li>Artificial Intelligence</li>
             <li>Computer Networks</li>
           </ul>
+          <h3 class="edu-work-title">Crystal Palace Manager — 6 Years</h3>
           <div class="skill-group edu-work-group">
-            <span class="skill-group-label">Crystal Palace Manager — 6 Years</span>
             <p class="edu-work-desc">Managed day-to-day operations of a skating rink, overseeing staff scheduling, customer relations, event coordination, and facility safety.</p>
             <ul class="tag-list">
               <li>Leadership</li>
@@ -187,38 +187,27 @@
     <section class="panel content-section" id="certifications">
       <h2 class="section-title">Certifications &amp; Training</h2>
       <div class="cards">
-        <article class="cert-card">
+        <article class="cert-card" tabindex="0" role="button" aria-haspopup="dialog"
+          data-description="Covered core AWS cloud concepts including global infrastructure, security, compliance, pricing models, and key services across compute, storage, networking, and databases. Built a solid understanding of cloud architecture principles and the AWS shared responsibility model.">
           <span class="cert-issuer">AWS Academy</span>
           <h3 class="cert-name">AWS Academy Cloud Foundations</h3>
-          <p class="cert-desc">Covered core AWS cloud concepts including global infrastructure, security, compliance, pricing models, and key services across compute, storage, networking, and databases. Built a solid understanding of cloud architecture principles and the AWS shared responsibility model.</p>
         </article>
-        <article class="cert-card">
+        <article class="cert-card" tabindex="0" role="button" aria-haspopup="dialog"
+          data-description="Focused on developing, deploying, and debugging cloud-native applications using AWS services including Lambda, API Gateway, DynamoDB, S3, and Elastic Beanstalk. Strengthened skills in serverless architecture and building scalable cloud solutions.">
           <span class="cert-issuer">AWS Academy</span>
           <h3 class="cert-name">AWS Academy Cloud Developing</h3>
-          <p class="cert-desc">Focused on developing, deploying, and debugging cloud-native applications using AWS services including Lambda, API Gateway, DynamoDB, S3, and Elastic Beanstalk. Strengthened skills in serverless architecture and building scalable cloud solutions.</p>
         </article>
-        <article class="cert-card">
+        <article class="cert-card" tabindex="0" role="button" aria-haspopup="dialog"
+          data-description="Completed a three-year high school cybersecurity program focused on building toward the CompTIA A+ certification. Coursework covered network security, system hardening, basic digital forensics, and security best practices."
+          data-tags="Network Security,System Hardening,Digital Forensics,Security Best Practices,CompTIA A+ Track">
           <span class="cert-issuer">CompTIA A+ Track &nbsp;·&nbsp; 2016 – 2019</span>
           <h3 class="cert-name">3-Year Cybersecurity Program</h3>
-          <p class="cert-desc">Completed a three-year high school cybersecurity program focused on building toward the CompTIA A+ certification. Coursework covered network security, system hardening, basic digital forensics, and security best practices.</p>
-          <ul class="tag-list cert-tags">
-            <li>Network Security</li>
-            <li>System Hardening</li>
-            <li>Digital Forensics</li>
-            <li>Security Best Practices</li>
-            <li>CompTIA A+ Track</li>
-          </ul>
         </article>
-        <article class="cert-card">
+        <article class="cert-card" tabindex="0" role="button" aria-haspopup="dialog"
+          data-description="Competed in the Air Force Association's CyberPatriot program multiple times over three years, defending live operating system images against scored vulnerabilities. Developed hands-on experience securing Windows and Linux environments under competition conditions."
+          data-tags="Windows Hardening,Linux Security,Vulnerability Remediation,Team Competition">
           <span class="cert-issuer">AFA CyberPatriot &nbsp;·&nbsp; 2016 – 2019</span>
           <h3 class="cert-name">CyberPatriot Competitions</h3>
-          <p class="cert-desc">Competed in the Air Force Association's CyberPatriot program multiple times over three years, defending live operating system images against scored vulnerabilities. Developed hands-on experience securing Windows and Linux environments under competition conditions.</p>
-          <ul class="tag-list cert-tags">
-            <li>Windows Hardening</li>
-            <li>Linux Security</li>
-            <li>Vulnerability Remediation</li>
-            <li>Team Competition</li>
-          </ul>
         </article>
       </div>
     </section>
@@ -272,6 +261,7 @@
         <div class="modal-project-body">
           <h3 id="projectModalTitle"></h3>
           <p id="projectModalText"></p>
+          <ul class="tag-list modal-tags" id="projectModalTags"></ul>
           <p class="modal-project-credit" id="projectModalCredit"></p>
         </div>
       </div>

@@ -396,10 +396,14 @@ main {
 .skill-group:first-of-type {
   margin-top: 0;
 }
+.card h3.edu-work-title {
+  margin: 24px 0 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-strong);
+}
 .edu-work-group {
-  margin-top: 20px;
-  padding-top: 18px;
-  border-top: 1px solid var(--card-border);
+  margin-top: 12px;
 }
 .edu-work-desc {
   margin: 8px 0 12px;
@@ -435,13 +439,12 @@ main {
 }
 .github-charts {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
+  grid-template-columns: 1fr;
+  gap: 32px;
 }
 .contrib-chart {
   display: grid;
-  gap: 8px;
-  min-width: 0;
+  gap: 10px;
 }
 .contrib-chart-header {
   display: flex;
@@ -463,19 +466,14 @@ main {
   color: var(--muted);
   white-space: nowrap;
 }
-.contrib-scroll {
-  overflow-x: auto;
-  padding: 2px 2px 6px;
-}
 .contrib-months {
   display: flex;
-  gap: 3px;
-  min-width: 480px;
+  gap: 2px;
+  width: 100%;
   margin-bottom: 4px;
 }
 .contrib-month-label {
-  width: 10px;
-  flex-shrink: 0;
+  flex: 1;
   font-size: 10px;
   color: var(--muted);
   white-space: nowrap;
@@ -483,19 +481,18 @@ main {
 }
 .contrib-weeks {
   display: flex;
-  gap: 3px;
-  min-width: 480px;
+  gap: 2px;
+  width: 100%;
 }
 .contrib-week {
   display: flex;
   flex-direction: column;
-  gap: 3px;
-  width: 10px;
-  flex-shrink: 0;
+  gap: 2px;
+  flex: 1;
 }
 .contrib-day {
-  width: 10px;
-  height: 10px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
   border-radius: 2px;
   background: rgba(var(--overlay-rgb),.08);
 }
@@ -529,11 +526,6 @@ main {
 }
 .contrib-tooltip.show {
   opacity: 1;
-}
-@media (max-width: 760px) {
-  .github-charts {
-    grid-template-columns: 1fr;
-  }
 }
 .card {
   padding: 24px;
@@ -580,12 +572,29 @@ main {
   color: var(--muted);
   line-height: 1.65;
 }
-.cert-tags {
-  margin-top: 4px;
+#certifications .cert-card {
+  cursor: pointer;
+}
+#certifications .cert-card::after {
+  content: "View details →";
+  display: block;
+  margin-top: 12px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+  transition: transform .28s ease;
+}
+#certifications .cert-card:hover::after {
+  transform: translateX(5px);
+}
+#certifications .cert-card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 .card:hover {
   transform: translateY(-6px);
-  border-color: rgba(204,0,0,.35);
+  border-color: rgba(124,156,255,.35);
 }
 .card h3 {
   margin: 0 0 12px;
@@ -657,6 +666,13 @@ main {
   margin: 0;
   color: var(--text);
   line-height: 1.65;
+}
+.modal-tags {
+  margin: 10px 0 0;
+  padding: 0;
+}
+.modal-tags[hidden] {
+  display: none;
 }
 .modal-project-credit[hidden] {
   display: none;
@@ -744,8 +760,8 @@ main {
 }
 .modal {
   width: min(520px, 100%);
-  background: #2b2f35;
-  border: 1px solid rgba(255,255,255,.14);
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
   border-radius: 28px;
   padding: 28px;
   box-shadow: 0 28px 90px rgba(0,0,0,.32);
@@ -754,15 +770,13 @@ main {
   position: relative;
 }
 .modal.success {
-  /* Darker gray border; remove the green outline/glow */
-  border-color: #1f2428;
-  background: #2b2f35;
+  border-color: var(--panel-border);
+  background: var(--panel-bg);
   box-shadow: 0 18px 60px rgba(0,0,0,.35);
 }
 .modal.error {
-  /* Match success card styling but use red text for messaging */
-  border-color: #1f2428;
-  background: #2b2f35;
+  border-color: var(--panel-border);
+  background: var(--panel-bg);
   box-shadow: 0 18px 60px rgba(0,0,0,.35);
 }
 .modal-close {
